@@ -7,25 +7,36 @@
     "displayName": "Order"
   },
   "options": {
-    "draftAndPublish": false
+    "draftAndPublish": true
   },
+  "pluginOptions": {},
   "attributes": {
     "orderId": {
       "type": "uid",
-      "targetField": "id",
       "required": true
     },
-    "status": {
+    "orderstatus": {
       "type": "enumeration",
-      "enum": ["pending", "paid", "shipped", "delivered", "cancelled"],
-      "default": "pending"
+      "enum": [
+        "pending",
+        "paid",
+        "processing",
+        "shipped",
+        "delivered",
+        "cancelled",
+        "failed"
+      ]
     },
     "total": {
-      "type": "decimal",
-      "required": true
+      "type": "decimal"
     },
     "paymentProvider": {
-      "type": "string"
+      "type": "enumeration",
+      "enum": [
+        "razorpay",
+        "stripe",
+        "cod"
+      ]
     },
     "paymentId": {
       "type": "string"
@@ -33,10 +44,11 @@
     "shippingAddress": {
       "type": "json"
     },
-    "user": {
+    "users_permissions_user": {
       "type": "relation",
       "relation": "manyToOne",
-      "target": "plugin::users-permissions.user"
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "orders"
     },
     "order_items": {
       "type": "relation",

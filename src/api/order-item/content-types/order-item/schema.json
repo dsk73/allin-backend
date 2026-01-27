@@ -4,30 +4,33 @@
   "info": {
     "singularName": "order-item",
     "pluralName": "order-items",
-    "displayName": "Order Item"
+    "displayName": "OrderItem"
   },
   "options": {
-    "draftAndPublish": false
+    "draftAndPublish": true
   },
+  "pluginOptions": {},
   "attributes": {
     "quantity": {
-      "type": "integer",
-      "required": true
+      "type": "integer"
     },
     "price": {
-      "type": "decimal",
-      "required": true
+      "type": "integer"
     },
     "product": {
       "type": "relation",
       "relation": "manyToOne",
-      "target": "api::product.product"
+      "target": "api::product.product",
+      "inversedBy": "order_items"
     },
     "order": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::order.order",
       "inversedBy": "order_items"
+    },
+    "productSnapshot": {
+      "type": "json"
     }
   }
 }

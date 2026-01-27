@@ -1,4 +1,6 @@
-'use strict';
+require("dotenv").config({ path: ".env.local" });
+
+("use strict");
 
 module.exports = {
   /**
