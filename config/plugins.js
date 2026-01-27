@@ -1,4 +1,5 @@
-module.exports = {
+module.exports = () => ({
+  // ✅ Cloudinary upload (unchanged logic)
   upload: {
     config: {
       provider: "cloudinary",
@@ -9,4 +10,9 @@ module.exports = {
       },
     },
   },
-};
+
+  // ⚠️ TEMPORARY: enable CT Builder to sync permissions
+  "content-type-builder": {
+    enabled: true,
+  },
+});
