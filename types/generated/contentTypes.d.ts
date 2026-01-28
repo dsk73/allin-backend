@@ -623,7 +623,7 @@ export interface ApiProductReviewProductReview
     singularName: 'product-review';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     approved: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
