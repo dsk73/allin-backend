@@ -1,28 +1,17 @@
 "use strict";
 
 module.exports = {
-  async afterCreate(event) {
-    const { result, params } = event;
-
-    const productId = params.data?.product;
-
-    if (!productId) return;
+  async beforeCreate(event) {
+    const { data } = event.params;
 
     /**
-     * Strapi v5:
-     * Public REST create does NOT persist relations.
-     * We must explicitly update the entry after creation.
+     * Strapi v5 requires relations to be connected explicitly
+     * Passing product ID directly is ignored otherwise
      */
-    await strapi.entityService.update(
-      "api::product-review.product-review",
-      result.id,
-      {
-        data: {
-          product: {
-            connect: [{ id: productId }],
-          },
-        },
-      },
-    );
+    if (data.product) {
+      data.product = {
+        connect: [{ id: data.product }],
+      };
+    }
   },
 };
