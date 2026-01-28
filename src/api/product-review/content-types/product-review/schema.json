@@ -7,7 +7,7 @@
     "displayName": "ProductReview"
   },
   "options": {
-    "draftAndPublish": false
+    "draftAndPublish": true
   },
   "pluginOptions": {},
   "attributes": {
