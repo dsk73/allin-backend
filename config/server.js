@@ -5,4 +5,14 @@ module.exports = ({ env }) => ({
   app: {
     keys: env.array("APP_KEYS"),
   },
+
+  // ✅ REQUIRED for Cloudinary thumbnails & admin previews
+  image: {
+    breakpoints: {
+      thumbnail: 150,
+      small: 500,
+      medium: 750,
+      large: 1000,
+    },
+  },
 });

@@ -1,5 +1,5 @@
 module.exports = () => ({
-  // ✅ Cloudinary upload (unchanged logic)
+  // ✅ Cloudinary upload provider
   upload: {
     config: {
       provider: "cloudinary",
@@ -7,6 +7,11 @@ module.exports = () => ({
         cloud_name: process.env.CLOUDINARY_NAME,
         api_key: process.env.CLOUDINARY_KEY,
         api_secret: process.env.CLOUDINARY_SECRET,
+      },
+      actionOptions: {
+        upload: {},
+        uploadStream: {},
+        delete: {},
       },
     },
   },
