@@ -2,25 +2,24 @@
 
 module.exports = {
   async afterCreate(event) {
+    const { result, params } = event;
+
+    const productId = params?.data?.product;
+    if (!productId) return;
+
     try {
-      const { result, params } = event;
-      const productId = params?.data?.product;
-
-      if (!productId) return;
-
+      // Assign relation properly (manyToOne)
       await strapi.entityService.update(
         "api::product-review.product-review",
         result.id,
         {
           data: {
-            product: {
-              connect: [{ id: productId }],
-            },
+            product: productId,
           },
         },
       );
-    } catch (err) {
-      strapi.log.error("❌ Review lifecycle failed:", err);
+    } catch (error) {
+      strapi.log.error("❌ Failed to link product to review:", error);
     }
   },
 };
