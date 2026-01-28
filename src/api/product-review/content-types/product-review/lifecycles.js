@@ -1,17 +1,26 @@
 "use strict";
 
 module.exports = {
-  async beforeCreate(event) {
-    const { data } = event.params;
+  async afterCreate(event) {
+    try {
+      const { result, params } = event;
+      const productId = params?.data?.product;
 
-    /**
-     * Strapi v5 requires relations to be connected explicitly
-     * Passing product ID directly is ignored otherwise
-     */
-    if (data.product) {
-      data.product = {
-        connect: [{ id: data.product }],
-      };
+      if (!productId) return;
+
+      await strapi.entityService.update(
+        "api::product-review.product-review",
+        result.id,
+        {
+          data: {
+            product: {
+              connect: [{ id: productId }],
+            },
+          },
+        },
+      );
+    } catch (err) {
+      strapi.log.error("❌ Review lifecycle failed:", err);
     }
   },
 };
