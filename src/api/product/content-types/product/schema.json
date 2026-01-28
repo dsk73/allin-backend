@@ -52,16 +52,16 @@
       "target": "api::product-media.product-media",
       "mappedBy": "product"
     },
-    "product_reviews": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::product-review.product-review",
-      "mappedBy": "product"
-    },
     "order_items": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::order-item.order-item",
+      "mappedBy": "product"
+    },
+    "product_reviews": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::product-review.product-review",
       "mappedBy": "product"
     }
   }
